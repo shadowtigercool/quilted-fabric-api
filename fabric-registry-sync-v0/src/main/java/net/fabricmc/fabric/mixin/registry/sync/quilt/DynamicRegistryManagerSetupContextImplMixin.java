@@ -38,6 +38,8 @@ import net.fabricmc.fabric.api.event.registry.DynamicRegistryView;
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.fabricmc.fabric.api.event.registry.RegistryEntryRemovedCallback;
 
+import org.spongepowered.asm.mixin.Unique;
+
 @Mixin(DynamicRegistryManagerSetupContextImpl.class)
 public abstract class DynamicRegistryManagerSetupContextImplMixin implements DynamicRegistryManagerSetupContext, DynamicRegistryManager, DynamicRegistryView {
 	@Shadow(remap = false)

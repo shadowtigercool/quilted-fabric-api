@@ -18,6 +18,9 @@ package net.fabricmc.fabric.mixin.registry.sync;
 
 import java.util.stream.Stream;
 
+import net.minecraft.registry.SimpleRegistry;
+
+import org.quiltmc.qsl.registry.api.sync.RegistrySynchronization;
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -41,8 +44,12 @@ abstract class SerializableRegistriesMixin {
 	@Redirect(method = "method_45961", at = @At(value = "INVOKE", target = "Lnet/minecraft/registry/SerializableRegistries;stream(Lnet/minecraft/registry/DynamicRegistryManager;)Ljava/util/stream/Stream;"))
 	private static Stream<DynamicRegistryManager.Entry<?>> filterNonSyncedEntries(DynamicRegistryManager drm) {
 		return stream(drm).filter(entry -> {
-			boolean canSkip = DynamicRegistriesImpl.SKIP_EMPTY_SYNC_REGISTRIES.contains(entry.key());
-			return !canSkip || entry.value().size() > 0;
+			//boolean canSkip = DynamicRegistriesImpl.SKIP_EMPTY_SYNC_REGISTRIES.contains(entry.key());
+			//return !canSkip || entry.value().size() > 0;
+			if(DynamicRegistriesImpl.SKIP_EMPTY_SYNC_REGISTRIES.contains(entry.key())){
+				RegistrySynchronization.setRegistryOptional((SimpleRegistry<?>) drm.get(entry.key()));
+			}
+			return true;
 		});
 	}
 }

@@ -8,3 +8,4 @@ accessible class net/minecraft/registry/SerializableRegistries$Info
 accessible method net/minecraft/registry/SerializableRegistries$Info <init> (Lnet/minecraft/registry/RegistryKey;Lcom/mojang/serialization/Codec;)V
 accessible field net/minecraft/registry/SerializableRegistries REGISTRIES Ljava/util/Map;
 mutable field net/minecraft/registry/SerializableRegistries REGISTRIES Ljava/util/Map;
+

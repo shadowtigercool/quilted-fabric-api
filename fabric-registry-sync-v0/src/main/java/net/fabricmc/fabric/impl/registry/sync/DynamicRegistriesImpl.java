@@ -17,13 +17,14 @@
 package net.fabricmc.fabric.impl.registry.sync;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import com.google.common.collect.ImmutableMap;
 import com.mojang.serialization.Codec;
+
 import org.jetbrains.annotations.Unmodifiable;
 
 import net.minecraft.registry.Registry;
@@ -33,8 +34,11 @@ import net.minecraft.registry.SerializableRegistries;
 
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 
+import org.quiltmc.qsl.registry.api.dynamic.DynamicMetaRegistry;
+import org.quiltmc.qsl.registry.impl.dynamic.DynamicMetaRegistryImpl;
+import org.quiltmc.qsl.registry.mixin.DynamicRegistrySyncAccessor;
+
 public final class DynamicRegistriesImpl {
-	private static final List<RegistryLoader.Entry<?>> DYNAMIC_REGISTRIES = new ArrayList<>(RegistryLoader.DYNAMIC_REGISTRIES);
 	public static final Set<RegistryKey<? extends Registry<?>>> DYNAMIC_REGISTRY_KEYS = new HashSet<>();
 	public static final Set<RegistryKey<? extends Registry<?>>> SKIP_EMPTY_SYNC_REGISTRIES = new HashSet<>();
 
@@ -48,7 +52,7 @@ public final class DynamicRegistriesImpl {
 	}
 
 	public static @Unmodifiable List<RegistryLoader.Entry<?>> getDynamicRegistries() {
-		return List.copyOf(DYNAMIC_REGISTRIES);
+		return List.copyOf(RegistryLoader.DYNAMIC_REGISTRIES);
 	}
 
 	public static <T> void register(RegistryKey<? extends Registry<T>> key, Codec<T> codec) {
@@ -58,9 +62,7 @@ public final class DynamicRegistriesImpl {
 		if (!DYNAMIC_REGISTRY_KEYS.add(key)) {
 			throw new IllegalArgumentException("Dynamic registry " + key + " has already been registered!");
 		}
-
-		var entry = new RegistryLoader.Entry<>(key, codec);
-		DYNAMIC_REGISTRIES.add(entry);
+		DynamicMetaRegistry.register(key, codec);
 	}
 
 	public static <T> void addSyncedRegistry(RegistryKey<? extends Registry<T>> registryKey, Codec<T> networkCodec, DynamicRegistries.SyncOption... options) {
@@ -68,11 +70,9 @@ public final class DynamicRegistriesImpl {
 		Objects.requireNonNull(networkCodec, "Network codec cannot be null");
 		Objects.requireNonNull(options, "Options cannot be null");
 
-		if (!(SerializableRegistries.REGISTRIES instanceof HashMap<?, ?>)) {
-			SerializableRegistries.REGISTRIES = new HashMap<>(SerializableRegistries.REGISTRIES);
-		}
-
-		SerializableRegistries.REGISTRIES.put(registryKey, new SerializableRegistries.Info<>(registryKey, networkCodec));
+		var builder = ImmutableMap.<RegistryKey<? extends Registry<?>>, Object>builder().putAll(DynamicRegistrySyncAccessor.quilt$getSyncedCodecs());
+		DynamicRegistrySyncAccessor.quilt$invokeAddSyncedRegistry(builder, registryKey, networkCodec);
+		DynamicRegistrySyncAccessor.quilt$setSyncedCodecs(builder.build());
 
 		for (DynamicRegistries.SyncOption option : options) {
 			if (option == DynamicRegistries.SyncOption.SKIP_WHEN_EMPTY) {

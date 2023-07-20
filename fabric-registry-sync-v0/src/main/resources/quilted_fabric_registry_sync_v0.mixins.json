@@ -8,15 +8,16 @@
     "DebugChunkGeneratorAccessor",
     "IdListMixin",
     "LevelStorageSessionMixin",
-    "MinecraftServerMixin",
     "RegistriesAccessor",
     "RegistriesMixin",
-    "RegistryLoaderMixin",
     "SaveLoadingMixin",
     "SerializableRegistriesMixin",
     "SimpleRegistryMixin",
     "StructuresToConfiguredStructuresFixMixin",
-    "TagManagerLoaderMixin"
+    "TagManagerLoaderMixin",
+    "quilt.DynamicMetaRegistryImplMixin",
+    "quilt.DynamicRegistryManagerSetupContextImplMixin",
+    "quilt.workaround.DynamicRegistryManagerSetupContextImplMixin"
   ],
   "injectors": {
     "defaultRequire": 1

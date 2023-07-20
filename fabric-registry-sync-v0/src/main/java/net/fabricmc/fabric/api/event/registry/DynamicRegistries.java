@@ -26,8 +26,13 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryLoader;
 
 import net.fabricmc.fabric.impl.registry.sync.DynamicRegistriesImpl;
+import org.quiltmc.qsl.registry.api.dynamic.DynamicMetaRegistry; // import exists to clean up deprecated link, but is otherwise unused
 
 /**
+ *
+ * @deprecated Use Quilt Registry API's {@link org.quiltmc.qsl.registry.api.dynamic.DynamicMetaRegistry} instead.
+ * <p>
+ * <p>
  * Contains methods for registering and accessing dynamic {@linkplain Registry registries}.
  *
  * <h2>Basic usage</h2>
@@ -70,6 +75,7 @@ import net.fabricmc.fabric.impl.registry.sync.DynamicRegistriesImpl;
  * DynamicRegistries.registerSynced(MY_DATA_KEY, MyData.CODEC, MyData.NETWORK_CODEC);
  * }
  */
+@Deprecated()
 public final class DynamicRegistries {
 	private DynamicRegistries() {
 	}

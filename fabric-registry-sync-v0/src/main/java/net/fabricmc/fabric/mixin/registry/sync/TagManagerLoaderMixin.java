@@ -16,6 +16,7 @@
 
 package net.fabricmc.fabric.mixin.registry.sync;
 
+import org.quiltmc.qsl.registry.impl.dynamic.DynamicMetaRegistryImpl;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -32,17 +33,10 @@ import net.fabricmc.fabric.impl.registry.sync.DynamicRegistriesImpl;
 @Mixin(TagManagerLoader.class)
 abstract class TagManagerLoaderMixin {
 	@Inject(method = "getPath", at = @At("HEAD"), cancellable = true)
-	private static void onGetPath(RegistryKey<? extends Registry<?>> registry, CallbackInfoReturnable<String> info) {
-		// TODO: Expand this change to static registries in the future.
-		if (!DynamicRegistriesImpl.DYNAMIC_REGISTRY_KEYS.contains(registry)) {
-			return;
-		}
+	private static void onGetPath(RegistryKey<? extends Registry<?>> registryKey, CallbackInfoReturnable<String> info) {
+		Identifier id = registryKey.getValue();
 
-		Identifier id = registry.getValue();
-
-		// Vanilla doesn't mark namespaces in the directories of tags at all,
-		// so we prepend the directories with the namespace if it's a modded registry id.
-		if (!id.getNamespace().equals(Identifier.DEFAULT_NAMESPACE)) {
+		if (DynamicMetaRegistryImpl.isModdedRegistryId(id) && DynamicRegistriesImpl.DYNAMIC_REGISTRY_KEYS.contains(registryKey)) {
 			info.setReturnValue("tags/" + id.getNamespace() + "/" + id.getPath());
 		}
 	}
