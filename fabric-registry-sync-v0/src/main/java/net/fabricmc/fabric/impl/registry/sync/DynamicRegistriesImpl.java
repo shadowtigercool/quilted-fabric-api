@@ -16,7 +16,6 @@
 
 package net.fabricmc.fabric.impl.registry.sync;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -30,12 +29,10 @@ import org.jetbrains.annotations.Unmodifiable;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryLoader;
-import net.minecraft.registry.SerializableRegistries;
 
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 
 import org.quiltmc.qsl.registry.api.dynamic.DynamicMetaRegistry;
-import org.quiltmc.qsl.registry.impl.dynamic.DynamicMetaRegistryImpl;
 import org.quiltmc.qsl.registry.mixin.DynamicRegistrySyncAccessor;
 
 public final class DynamicRegistriesImpl {

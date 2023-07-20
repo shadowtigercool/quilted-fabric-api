@@ -15,7 +15,6 @@
     "SimpleRegistryMixin",
     "StructuresToConfiguredStructuresFixMixin",
     "TagManagerLoaderMixin",
-    "quilt.DynamicMetaRegistryImplMixin",
     "quilt.DynamicRegistryManagerSetupContextImplMixin",
     "quilt.workaround.DynamicRegistryManagerSetupContextImplMixin"
   ],
