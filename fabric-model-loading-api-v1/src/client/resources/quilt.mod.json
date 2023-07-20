@@ -17,7 +17,7 @@
 				"sources": "https://github.com/QuiltMC/quilted-fabric-api"
 			},
 			"license": "Apache-2.0",
-			"icon": "assets/quilted_fabric_registry_sync_v0/icon.png"
+			"icon": "assets/quilted_fabric_model_loading_v1/icon.png"
 		},
 		"intermediate_mappings": "net.fabricmc:intermediary",
 		"depends": [
@@ -35,8 +35,16 @@
 		"environment": "client"
 	},
 	"mixin": "quilted_fabric_model_loading_v1.mixins.json",
-	"fabric-api:module-lifecycle": "deprecated",
-	"loom:injected_interfaces": {
-		"net/minecraft/class_1092": [ "net/fabricmc/fabric/api/client/model/loading/v1/FabricBakedModelManager" ]
+	"quilt_loom": {
+		"injected_interfaces": {
+			"net/minecraft/class_1092": [ "net/fabricmc/fabric/api/client/model/loading/v1/FabricBakedModelManager" ]
+		},
+		"fabric-api:module-lifecycle": "stable",
+		"modmenu": {
+			"badges": [
+				"library"
+			],
+			"parent": "quilted_fabric_api"
+		}
 	}
 }
