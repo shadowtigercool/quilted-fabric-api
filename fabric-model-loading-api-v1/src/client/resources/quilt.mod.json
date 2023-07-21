@@ -35,16 +35,16 @@
 		"environment": "client"
 	},
 	"mixin": "quilted_fabric_model_loading_v1.mixins.json",
+	"fabric-api:module-lifecycle": "stable",
+	"modmenu": {
+		"badges": [
+			"library"
+		],
+		"parent": "quilted_fabric_api"
+	},
 	"quilt_loom": {
 		"injected_interfaces": {
 			"net/minecraft/class_1092": [ "net/fabricmc/fabric/api/client/model/loading/v1/FabricBakedModelManager" ]
-		},
-		"fabric-api:module-lifecycle": "stable",
-		"modmenu": {
-			"badges": [
-				"library"
-			],
-			"parent": "quilted_fabric_api"
 		}
 	}
 }

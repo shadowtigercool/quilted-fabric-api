@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2016, 2017, 2018, 2019 FabricMC
+ * Copyright 2016, 2017, 2018, 2019 FabricMC
+ * Copyright 2023 The Quilt Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,15 +19,14 @@ package net.fabricmc.fabric.mixin.registry.sync;
 
 import java.util.stream.Stream;
 
-import net.minecraft.registry.SimpleRegistry;
-
-import org.quiltmc.qsl.registry.api.sync.RegistrySynchronization;
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.quiltmc.qsl.registry.api.sync.RegistrySynchronization;
 
+import net.minecraft.registry.SimpleRegistry;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.SerializableRegistries;
 
@@ -46,7 +46,7 @@ abstract class SerializableRegistriesMixin {
 		return stream(drm).filter(entry -> {
 			//boolean canSkip = DynamicRegistriesImpl.SKIP_EMPTY_SYNC_REGISTRIES.contains(entry.key());
 			//return !canSkip || entry.value().size() > 0;
-			if(DynamicRegistriesImpl.SKIP_EMPTY_SYNC_REGISTRIES.contains(entry.key())){
+			if (DynamicRegistriesImpl.SKIP_EMPTY_SYNC_REGISTRIES.contains(entry.key())) {
 				RegistrySynchronization.setRegistryOptional((SimpleRegistry<?>) drm.get(entry.key()));
 			}
 			return true;

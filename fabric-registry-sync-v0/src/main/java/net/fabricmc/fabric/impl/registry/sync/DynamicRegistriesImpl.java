@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2016, 2017, 2018, 2019 FabricMC
+ * Copyright 2016, 2017, 2018, 2019 FabricMC
+ * Copyright 2023 The Quilt Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,17 +24,15 @@ import java.util.Set;
 
 import com.google.common.collect.ImmutableMap;
 import com.mojang.serialization.Codec;
-
 import org.jetbrains.annotations.Unmodifiable;
+import org.quiltmc.qsl.registry.api.dynamic.DynamicMetaRegistry;
+import org.quiltmc.qsl.registry.mixin.DynamicRegistrySyncAccessor;
 
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryLoader;
 
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
-
-import org.quiltmc.qsl.registry.api.dynamic.DynamicMetaRegistry;
-import org.quiltmc.qsl.registry.mixin.DynamicRegistrySyncAccessor;
 
 public final class DynamicRegistriesImpl {
 	public static final Set<RegistryKey<? extends Registry<?>>> DYNAMIC_REGISTRY_KEYS = new HashSet<>();

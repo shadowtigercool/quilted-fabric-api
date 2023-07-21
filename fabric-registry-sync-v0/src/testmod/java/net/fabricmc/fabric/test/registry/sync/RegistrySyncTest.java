@@ -106,9 +106,9 @@ public class RegistrySyncTest implements ModInitializer {
 
 		// Vanilla status effects don't have an entry for the int id 0, test we can handle this.
 		RegistryAttributeHolder.get(Registries.STATUS_EFFECT).addAttribute(RegistryAttribute.MODDED);
-		Registry.register(Registries.STATUS_EFFECT, new Identifier("test", "status_effect"),
-				StatusEffectAccessor.createNewStatusEffect(StatusEffectCategory.NEUTRAL, 0xffff9900)
-		);
+		//Registry.register(Registries.STATUS_EFFECT, new Identifier("test", "status_effect"),
+		//		StatusEffectAccessor.createNewStatusEffect(StatusEffectCategory.NEUTRAL, 0xffff9900)
+		//);
 
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) ->
 				dispatcher.register(CommandManager.literal("remote_remap_error_test").executes(context -> {

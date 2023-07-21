@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2016, 2017, 2018, 2019 FabricMC
+ * Copyright 2016, 2017, 2018, 2019 FabricMC
+ * Copyright 2023 The Quilt Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,14 +27,12 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryLoader;
 
 import net.fabricmc.fabric.impl.registry.sync.DynamicRegistriesImpl;
-import org.quiltmc.qsl.registry.api.dynamic.DynamicMetaRegistry; // import exists to clean up deprecated link, but is otherwise unused
 
 /**
  *
  * @deprecated Use Quilt Registry API's {@link org.quiltmc.qsl.registry.api.dynamic.DynamicMetaRegistry} instead.
- * <p>
- * <p>
- * Contains methods for registering and accessing dynamic {@linkplain Registry registries}.
+ *
+ * <p>Contains methods for registering and accessing dynamic {@linkplain Registry registries}.
  *
  * <h2>Basic usage</h2>
  * Custom dynamic registries can be registered with {@link #register(RegistryKey, Codec)}. These registries will not be
